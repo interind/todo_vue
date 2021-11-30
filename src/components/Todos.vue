@@ -1,32 +1,28 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-  </div>
+  <ul class="todos" >
+    <li v-for="item in list" :key="item.id">
+      <Todo :title="item.title" :description="item.description"/>
+    </li>
+  </ul>
 </template>
 
 <script>
+
+import Todo from './Todo.vue';
+
 export default {
-  name: 'HelloWorld',
+  name: 'Todos',
+  components: { Todo },
   props: {
-    msg: String,
+    list: Array,
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  .todos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 </style>
