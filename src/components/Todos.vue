@@ -1,7 +1,7 @@
 <template>
   <ul class="todos" >
-    <li v-for="todo in allTodos" :key="todo.id">
-      <Todo :title="todo.title" :body="todo.body" />
+    <li v-for="todo in allTodos" :key="todo._id">
+      <Todo :id="todo._id" :date="todo.date" :title="todo.title" :body="todo.body" />
     </li>
   </ul>
 </template>
@@ -16,7 +16,12 @@ export default {
   components: { Todo },
   computed: mapGetters(['allTodos']),
   mounted() {
-    this.$store.dispatch('getAllTodos');
+    if (localStorage.getItem('jwt')) {
+      this.$store.dispatch('getAllTodos');
+    } else {
+      this.router.push('/login');
+      localStorage.clear();
+    }
   },
 };
 </script>

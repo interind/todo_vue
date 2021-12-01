@@ -1,10 +1,11 @@
 <template>
   <ul class="todo">
     <li class="todo__item"><input type="checkbox" @change="classes($event)"></li>
+    <li :class="todoItem">{{date}}</li>
     <li :class="todoItem">{{title}}</li>
     <li :class="todoItem">{{body}}</li>
     <li class="todo__item">
-      <button class="button-delete" type="button" />
+      <button class="button-delete" @click="deleteCard(id)" type="button" />
     </li>
   </ul>
 </template>
@@ -15,11 +16,16 @@ export default {
   props: {
     title: String,
     body: String,
+    date: String,
+    id: Number,
   },
   data: () => ({
     todoItem: ['todo__item'],
   }),
   methods: {
+    deleteCard(id) {
+      this.$store.dispatch('deleteCard', id);
+    },
     classes(event) {
       if (event.target.checked) {
         this.todoItem.push('todo__item_disabled');

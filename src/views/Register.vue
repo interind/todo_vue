@@ -1,20 +1,21 @@
 <template>
-  <div class="login">
-    <h1>Login in</h1>
-    <Form :submit="login" />
+  <div class="register">
+    <h1>Register in</h1>
+    <Form :submit="register"/>
   </div>
 </template>
 
 <script>
+
 import Form from '@/components/Form.vue';
 import { filterKeys, getResponse } from '../utils/utils';
 
 export default {
-  name: 'Login',
+  name: 'Register',
   components: { Form },
   methods: {
-    login(arg) {
-      fetch('/signin', {
+    register(arg) {
+      fetch('/signup', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -24,8 +25,8 @@ export default {
       })
         .then((res) => getResponse(res, 'Ошибка регистрации'))
         .then((res) => {
-          localStorage.setItem('jwt', res.token);
-          this.$store.commit('updateStatus', true);
+          this.$store.commit('updateInfoUser', res);
+          this.$router.push('/login');
         })
         .catch((err) => console.log(err.message));
     },

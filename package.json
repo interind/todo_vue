@@ -28,6 +28,7 @@
   },
   "eslintConfig": {
     "root": true,
+    "rules": {"no-underscore-dangle": "off"},
     "env": {
       "node": true
     },
@@ -37,8 +38,7 @@
     ],
     "parserOptions": {
       "parser": "babel-eslint"
-    },
-    "rules": {}
+    }
   },
   "browserslist": [
     "> 1%",

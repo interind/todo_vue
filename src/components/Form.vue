@@ -1,36 +1,42 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submitForm">
     <label>
       Name
-      <input v-model="name">
+      <input type="text" v-model="obj.name">
     </label>
     <label>
       Email
-      <input v-model="email">
+      <input type="email" v-model="obj.email">
     </label>
     <label>
       Password
-      <input v-model="password">
+      <input type="password" autocomplete="false" v-model="obj.password">
+    </label>
+    <label>
+      Тема
+      <input type="text" v-model="obj.title">
+    </label>
+    <label>
+      Описание
+      <input type="text" v-model="obj.body">
     </label>
     <button type="submit">Отправить</button>
   </form>
 </template>
 
 <script>
-import api from '../utils/api';
 
 export default {
   name: 'Form',
-  date: () => ({
-    email: '',
-    name: '',
-    password: '',
+  props: {
+    submit: Function,
+  },
+  data: () => ({
+    obj: {},
   }),
   methods: {
-    submit() {
-      if (this.email && this.password && this.name) {
-        api.register({ email: this.email, password: this.password, name: this.name });
-      }
+    submitForm() {
+      this.submit(this.obj);
     },
   },
 };

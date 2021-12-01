@@ -1,8 +1,9 @@
-import api from '../../utils/api';
+import { getResponse } from '../../utils/utils';
+import { token } from '../../router';
 
 const user = {
   state: {
-    user: { email: '', name: '' },
+    user: { email: '', name: '', _id: '' },
   },
   mutations: {
     updateInfoUser(state, info) {
@@ -11,7 +12,15 @@ const user = {
   },
   actions: {
     getUser(context) {
-      return api.getInfoUser()
+      fetch('/users/me', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json; charset=UTF-8',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => getResponse(res, 'Ошибка данных пользователя'))
         .then((result) => context.commit('updateInfoUser', result))
         .catch((err) => window.confirm(err.message));
     },

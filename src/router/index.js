@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
+import Register from '../views/Register.vue';
 import '../styles/index.css';
 
 Vue.use(VueRouter);
 
-const auth = '1'; // константа авторизации
+export const token = localStorage.getItem('jwt') || '';
 
 const routes = [
   {
@@ -13,6 +14,12 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: { auth: true },
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: { layout: 'main' },
   },
   {
     path: '/login',
@@ -32,8 +39,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const login = to.matched.some(({ meta }) => meta.auth);
-  if (login && !auth) {
+  const login = to.matched.some((el) => el.meta.auth);
+  console.log(token);
+  if (login && !token) {
     next('/login');
   } else {
     next();

@@ -1,13 +1,12 @@
-import api from '../../utils/api';
-
 const auth = {
   state: {
     token: '',
+    _id: '',
     status: false,
   },
   mutations: {
     updateToken(state, info) {
-      state.token = info;
+      state._id = info._id;
     },
     updateStatus(state, res) {
       state.status = res;
@@ -15,17 +14,16 @@ const auth = {
   },
   actions: {
     authUser(context) {
-      return api.authorizationPost()
-        .then(() => context.commit('updateStatus', true))
-        .catch((err) => {
-          context.commit('updateStatus', false);
-          window.confirm(err.message);
-        });
+      if (this.getters.infoToken) {
+        context.commit('updateStatus', true);
+      }
+      context.commit('updateStatus', false);
+      window.confirm('Error token');
     },
   },
   getters: {
-    infoToken(state) {
-      return state.token;
+    infoStatus(state) {
+      return state.status;
     },
   },
 };
