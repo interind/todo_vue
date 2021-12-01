@@ -1,8 +1,8 @@
 <template>
-  <ul :class="todo">
+  <ul class="todo">
     <li class="todo__item"><input type="checkbox" @change="classes($event)"></li>
-    <li class="todo__item">{{title}}</li>
-    <li class="todo__item">{{description}}</li>
+    <li :class="todoItem">{{title}}</li>
+    <li :class="todoItem">{{body}}</li>
     <li class="todo__item">
       <button class="button-delete" type="button" />
     </li>
@@ -14,17 +14,17 @@ export default {
   name: 'Todo',
   props: {
     title: String,
-    description: String,
+    body: String,
   },
   data: () => ({
-    todo: ['todo'],
+    todoItem: ['todo__item'],
   }),
   methods: {
     classes(event) {
       if (event.target.checked) {
-        this.todo.push('todo_disabled');
+        this.todoItem.push('todo__item_disabled');
       } else {
-        this.todo.pop();
+        this.todoItem.pop();
       }
     },
   },
@@ -40,19 +40,12 @@ export default {
     max-width: 1000px;
     list-style: none;
     padding: 0;
-    position: relative;
   }
-  .todo_disabled::after {
-    position: absolute;
-    top: 50%;
-    bottom: 50%;
-    left: 20px;
-    right: 40px;
-    transform: translate(0, -50%);
-    content: '';
-    background-color: var(--color-white);
-    height: 2px;
-
+  .todo__item {
+    text-decoration: none;
+  }
+  .todo__item_disabled {
+    text-decoration: line-through;
   }
   .button-delete {
     border: 0;

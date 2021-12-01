@@ -1,20 +1,22 @@
 <template>
   <ul class="todos" >
-    <li v-for="item in list" :key="item.id">
-      <Todo :title="item.title" :description="item.description"/>
+    <li v-for="todo in allTodos" :key="todo.id">
+      <Todo :title="todo.title" :body="todo.body" />
     </li>
   </ul>
 </template>
 
 <script>
 
+import { mapGetters } from 'vuex';
 import Todo from './Todo.vue';
 
 export default {
   name: 'Todos',
   components: { Todo },
-  props: {
-    list: Array,
+  computed: mapGetters(['allTodos']),
+  mounted() {
+    this.$store.dispatch('getAllTodos');
   },
 };
 </script>
