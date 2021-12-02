@@ -1,13 +1,26 @@
 <template>
   <div id="app">
     <nav class="links">
-      <router-link class="link" to="/home">Home</router-link> |
-      <router-link class="link" to="/login">Login</router-link> |
-      <router-link class="link" to="/register">Register</router-link>
+      <template v-if="token">
+        <router-link class="link" to="/home">Home</router-link> |
+      </template>
+      <template v-else>
+        <router-link class="link" to="/login">Login</router-link> |
+        <router-link class="link" to="/register">Register</router-link>
+      </template>
     </nav>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data: () => ({
+    token: localStorage.getItem('jwt') || '',
+  }),
+};
+</script>
 
 <style>
 #app {
