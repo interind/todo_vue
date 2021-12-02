@@ -1,15 +1,17 @@
 <template>
   <div id="app">
-    <nav class="links">
-      <template v-if="token">
-        <router-link class="link" to="/home">Home</router-link> |
-      </template>
-      <template v-else>
+    <template v-if="token">
+      <nav class="links">
+        <router-link class="link" to="/">Home</router-link> |
+      </nav>
+    </template>
+    <template v-else>
+      <nav class="links">
         <router-link class="link" to="/login">Login</router-link> |
         <router-link class="link" to="/register">Register</router-link>
-      </template>
-    </nav>
-    <router-view/>
+      </nav>
+    </template>
+    <router-view />
   </div>
 </template>
 
@@ -17,7 +19,7 @@
 export default {
   name: 'App',
   data: () => ({
-    token: localStorage.getItem('jwt') || '',
+    token: localStorage.getItem('jwt'),
   }),
 };
 </script>

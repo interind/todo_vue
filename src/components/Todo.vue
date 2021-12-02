@@ -1,11 +1,15 @@
 <template>
   <ul class="todo">
     <li class="todo__item">
-      <input type="checkbox" @change="classes(id)" :checked="likes.length">
+      <input
+        type="checkbox"
+        @change="checkedCompleted(id)"
+        :checked="likes.length"
+      >
     </li>
-    <li :class="todoItem">{{date.slice(0, 10).split('-').reverse().join('/')}}</li>
-    <li :class="todoItem">{{likes.length}} {{title}}</li>
-    <li :class="todoItem">{{body}}</li>
+    <li :class="currentClasses">{{date.slice(0, 10).split('-').reverse().join('/')}}</li>
+    <li :class="currentClasses">{{likes.length}} {{title}}</li>
+    <li :class="currentClasses">{{body}}</li>
     <li class="todo__item">
       <button class="button-delete" @click="deleteCard(id)" type="button" />
     </li>
@@ -17,6 +21,9 @@ import { getResponse } from '../utils/utils';
 
 export default {
   name: 'Todo',
+  data: () => ({
+    todo: [],
+  }),
   props: {
     title: String,
     body: String,
@@ -24,14 +31,19 @@ export default {
     id: String,
     likes: Array,
   },
-  data: () => ({
-    todoItem: ['todo__item'],
-  }),
+  computed: {
+    currentClasses() {
+      if (this.likes.length) {
+        return ['todo__item', 'todo__item_disabled'];
+      }
+      return ['todo__item'];
+    },
+  },
   methods: {
     deleteCard(id) {
       this.$store.dispatch('deleteCard', id);
     },
-    classes(infoId) {
+    checkedCompleted(infoId) {
       const token = localStorage.getItem('jwt') || '';
       const status = this.likes.length;
       const toggleMethod = status ? 'DELETE' : 'PUT';
@@ -45,10 +57,8 @@ export default {
         .then((res) => getResponse(res, 'Ошибка метки карточки'))
         .then((card) => {
           if (!card.likes.length) {
-            this.todoItem.push('todo__item_disabled');
             this.$store.dispatch('getAllTodos');
           } else {
-            this.todoItem = ['todo__item'];
             this.$store.dispatch('getAllTodos');
           }
         })
@@ -79,8 +89,8 @@ export default {
   }
   .button-delete {
     border: 0;
-    width: 10px;
-    height: 2px;
+    width: 20px;
+    height: 3px;
     cursor: pointer;
     background-color: var(--color-red);
   }

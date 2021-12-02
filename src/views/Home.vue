@@ -30,7 +30,7 @@ export default {
   methods: {
     exit() {
       localStorage.clear();
-      this.$router.go('/login');
+      window.location.href = '/login';
     },
     addCard({ title, body }) {
       const token = localStorage.getItem('jwt') || '';

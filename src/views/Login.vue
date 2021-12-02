@@ -26,7 +26,7 @@ export default {
         .then((res) => {
           localStorage.setItem('jwt', res.token);
           this.$store.commit('updateStatus', true);
-          window.location.href = '/home';
+          window.location.href = '/';
         })
         .catch((err) => window.confirm(err.message));
     },

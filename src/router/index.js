@@ -10,7 +10,7 @@ export const token = localStorage.getItem('jwt') || '';
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     component: Home,
     meta: { auth: true },
