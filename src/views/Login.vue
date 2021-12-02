@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <h1>Login in</h1>
-    <Form :submit="login" />
+    <Form theme="login" :submit="login" />
   </div>
 </template>
 
@@ -26,8 +26,9 @@ export default {
         .then((res) => {
           localStorage.setItem('jwt', res.token);
           this.$store.commit('updateStatus', true);
+          window.location.href = '/home';
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => window.confirm(err.message));
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="links">
-      <router-link class="link" to="/">Home</router-link> |
+      <router-link class="link" to="/home">Home</router-link> |
       <router-link class="link" to="/login">Login</router-link> |
       <router-link class="link" to="/register">Register</router-link>
     </nav>
@@ -15,7 +15,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: grid;
-  color: var(--color-white);
+  color: var(--color-black);
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -24,6 +24,6 @@
 }
 .link {
   text-decoration: none;
-  color: var(--color-white);
+  color: var(--color-black);
 }
 </style>

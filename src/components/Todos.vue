@@ -1,7 +1,13 @@
 <template>
   <ul class="todos" >
     <li v-for="todo in allTodos" :key="todo._id">
-      <Todo :id="todo._id" :date="todo.date" :title="todo.title" :body="todo.body" />
+      <Todo
+        :id="todo._id"
+        :date="todo.date"
+        :title="todo.title"
+        :body="todo.body"
+        :likes="todo.likes"
+      />
     </li>
   </ul>
 </template>
@@ -31,5 +37,7 @@ export default {
     list-style: none;
     display: grid;
     grid-template-columns: 1fr;
+    padding: 0;
+    justify-items: center;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <h1>Register in</h1>
-    <Form :submit="register"/>
+    <Form theme="register" :submit="register"/>
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
           this.$store.commit('updateInfoUser', res);
           this.$router.push('/login');
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => window.confirm(err.message));
     },
   },
 };

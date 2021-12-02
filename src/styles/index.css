@@ -3,11 +3,12 @@
   --color-white: #fff;
   --color-blue: #00f;
   --color-red: #f00;
+  --color-grey: #808080;
 }
 
 .body {
-  background: var(--color-black);
-  color: var(--color-white);
+  background: var(--color-white);
+  color: var(--color-black);
 }
 .body::-webkit-scrollbar-button {
   background-repeat: no-repeat;

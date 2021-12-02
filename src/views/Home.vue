@@ -1,7 +1,11 @@
 <template>
   <section class="content">
     <h1 class="home__title">{{titleHome}}</h1>
-    <p>email: {{infoUser.email}}, name: {{infoUser.name}}</p>
+    <div class="info">
+      <p class="info__text">email: {{infoUser.email}}</p>
+      <p class="info__text">name: {{infoUser.name}}</p>
+      <button class="info__button-close" @click="exit" type="button">EXIT</button>
+    </div>
     <Form :submit="addCard"/>
     <Todos />
   </section>
@@ -24,6 +28,10 @@ export default {
     titleHome: 'Список дел',
   }),
   methods: {
+    exit() {
+      localStorage.clear();
+      this.$router.go('/login');
+    },
     addCard({ title, body }) {
       const token = localStorage.getItem('jwt') || '';
       fetch('/cards', {
@@ -39,7 +47,7 @@ export default {
       })
         .then((res) => getResponse(res, 'Ошибка добавления новой карточки'))
         .then(() => this.$store.dispatch('getAllTodos'))
-        .catch((err) => console.log(err.message));
+        .catch((err) => window.confirm(err.message));
     },
   },
   computed: mapGetters(['infoUser']),
@@ -52,6 +60,26 @@ export default {
 <style>
   .content {
     display: grid;
+    align-content: center;
+  }
+  .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: auto;
+    max-width: 50%;
+  }
+  .info__button-close {
+    border: 0;
+    background-color: initial;
+    color: var(--color-red);
+    font-size: 20px;
+    width: 40px;
+    cursor: pointer;
+  }
+  .info__text {
+    margin: 0;
+    margin-right: 20px;
   }
   .home__title {
     margin: 0;

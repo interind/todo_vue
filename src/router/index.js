@@ -10,7 +10,7 @@ export const token = localStorage.getItem('jwt') || '';
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: { auth: true },
@@ -40,7 +40,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const login = to.matched.some((el) => el.meta.auth);
-  console.log(token);
   if (login && !token) {
     next('/login');
   } else {

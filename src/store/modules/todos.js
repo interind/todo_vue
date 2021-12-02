@@ -27,7 +27,10 @@ const todos = {
       })
         .then((res) => getResponse(res, 'Ошибка данных карточек'))
         .then((result) => context.commit('updateTodos', result))
-        .catch((err) => window.confirm(err.message));
+        .catch((err) => {
+          window.confirm(err.message);
+          localStorage.clear();
+        });
     },
     deleteCard(context, id) {
       fetch(`/cards/${id}`, {

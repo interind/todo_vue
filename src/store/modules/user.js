@@ -22,7 +22,10 @@ const user = {
       })
         .then((res) => getResponse(res, 'Ошибка данных пользователя'))
         .then((result) => context.commit('updateInfoUser', result))
-        .catch((err) => window.confirm(err.message));
+        .catch((err) => {
+          window.confirm(err.message);
+          localStorage.clear();
+        });
     },
   },
   getters: {
