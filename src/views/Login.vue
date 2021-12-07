@@ -14,7 +14,7 @@ export default {
   components: { Form },
   methods: {
     login(arg) {
-      fetch('/signin', {
+      return fetch('/signin', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -22,7 +22,7 @@ export default {
         },
         body: JSON.stringify({ ...filterKeys(arg) }),
       })
-        .then((res) => getResponse(res, 'Ошибка регистрации'))
+        .then((res) => getResponse(res, 'Ошибка авторизации'))
         .then((res) => {
           localStorage.setItem('jwt', res.token);
           this.$store.commit('updateStatus', true);
@@ -34,5 +34,7 @@ export default {
 };
 </script>
 <style scoped>
-
+  .login {
+    min-width: 600px;
+  }
 </style>

@@ -2,13 +2,13 @@
   <div id="app">
     <template v-if="token">
       <nav class="links">
-        <router-link class="link" to="/">Home</router-link> |
+        <button class="button-close" @click="exit">Exit</button>
       </nav>
     </template>
     <template v-else>
       <nav class="links">
-        <router-link class="link" to="/login">Login</router-link> |
-        <router-link class="link" to="/register">Register</router-link>
+        <router-link class="link" active-class="link_active" to="/login">Login</router-link> |
+        <router-link class="link" active-class="link_active" to="/register">Register</router-link>
       </nav>
     </template>
     <router-view />
@@ -21,6 +21,12 @@ export default {
   data: () => ({
     token: localStorage.getItem('jwt'),
   }),
+  methods: {
+    exit() {
+      localStorage.clear();
+      window.location.href = '/login';
+    },
+  },
 };
 </script>
 
@@ -30,9 +36,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: grid;
+  justify-content: center;
   color: var(--color-black);
-  max-width: 1280px;
-  margin: 0 auto;
+  padding-top: 30px;
 }
 .links {
   justify-self: end;
@@ -40,5 +46,16 @@ export default {
 .link {
   text-decoration: none;
   color: var(--color-black);
+}
+.button-close {
+    border: 0;
+    background-color: initial;
+    color: var(--color-red);
+    font-size: 20px;
+    width: 40px;
+    cursor: pointer;
+  }
+.link_active {
+  border-bottom: 1px solid var(--color-black);
 }
 </style>

@@ -15,7 +15,7 @@ export default {
   components: { Form },
   methods: {
     register(arg) {
-      fetch('/signup', {
+      return fetch('/signup', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

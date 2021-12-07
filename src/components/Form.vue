@@ -15,6 +15,7 @@
           class="form__input"
           placeholder="Password"
           type="password"
+          minlength="6"
           autocomplete="false"
           v-model="obj.password"
           required
@@ -27,6 +28,8 @@
           class="form__input"
           placeholder="Name"
           type="text"
+          minlength="2"
+          maxlength="30"
           v-model="obj.name"
           required
         >
@@ -45,6 +48,7 @@
           class="form__input"
           placeholder="Password"
           type="password"
+          minlength="6"
           autocomplete="false"
           v-model="obj.password"
           required
@@ -57,18 +61,22 @@
           class="form__input"
           placeholder="Тема задачи:"
           type="text"
+          minlength="2"
+          maxlength="30"
           v-model="obj.title"
           required
         >
       </label>
       <label>
-        <input
+        <textarea
         class="form__input"
         placeholder="Описание:"
         type="text"
         v-model="obj.body"
+        minlength="10"
+        maxlength="200"
         required
-      >
+      ></textarea>
       </label>
     </template>
     <button
@@ -93,7 +101,9 @@ export default {
   }),
   methods: {
     submitForm() {
-      this.submit(this.obj);
+      this.submit(this.obj)
+        .then(() => this.$el.reset())
+        .catch((err) => console.error(err));
     },
   },
 };
@@ -103,6 +113,7 @@ export default {
   .form {
     display: flex;
     max-width: 600px;
+    width: 100%;
     margin: 20px auto;
   }
   .form__button-submit {
@@ -111,7 +122,6 @@ export default {
   }
   .form__input {
     border: 0;
-    border-bottom: 1px solid var(--color-grey);
   }
   .form__input:focus {
     outline: none;

@@ -2,7 +2,7 @@ export function getResponse(res, message) {
   if (res.ok) {
     return res.json();
   }
-  throw Promise.reject(new Error(message));
+  return Promise.reject(new Error(message));
 }
 
 export function filterKeys(arg) {

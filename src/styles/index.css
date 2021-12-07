@@ -9,6 +9,7 @@
 .body {
   background: var(--color-white);
   color: var(--color-black);
+  margin: 0 auto;
 }
 .body::-webkit-scrollbar-button {
   background-repeat: no-repeat;

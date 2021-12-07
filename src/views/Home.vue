@@ -4,7 +4,6 @@
     <div class="info">
       <p class="info__text">email: {{infoUser.email}}</p>
       <p class="info__text">name: {{infoUser.name}}</p>
-      <button class="info__button-close" @click="exit" type="button">EXIT</button>
     </div>
     <Form :submit="addCard"/>
     <Todos />
@@ -28,13 +27,9 @@ export default {
     titleHome: 'Список дел',
   }),
   methods: {
-    exit() {
-      localStorage.clear();
-      window.location.href = '/login';
-    },
     addCard({ title, body }) {
       const token = localStorage.getItem('jwt') || '';
-      fetch('/cards', {
+      return fetch('/cards', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -61,25 +56,21 @@ export default {
   .content {
     display: grid;
     align-content: center;
+    min-width: 50vw;
   }
   .info {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    margin-left: auto;
+    justify-self: end;
     max-width: 50%;
-  }
-  .info__button-close {
-    border: 0;
-    background-color: initial;
-    color: var(--color-red);
-    font-size: 20px;
-    width: 40px;
-    cursor: pointer;
   }
   .info__text {
     margin: 0;
     margin-right: 20px;
+  }
+  .info__text:last-of-type {
+    margin-right: 0;
   }
   .home__title {
     margin: 0;

@@ -1,5 +1,6 @@
 <template>
   <ul class="todos" >
+  <template v-if="allTodos.length">
     <li v-for="todo in allTodos" :key="todo._id">
       <Todo
         :id="todo._id"
@@ -9,6 +10,10 @@
         :likes="todo.likes"
       />
     </li>
+  </template>
+  <template v-else>
+    <li>Ваш список пуст</li>
+  </template>
   </ul>
 </template>
 
