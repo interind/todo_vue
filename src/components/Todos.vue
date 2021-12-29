@@ -1,7 +1,7 @@
 <template>
-  <ul class="todos" >
+  <b-list-group >
   <template v-if="allTodos.length">
-    <li v-for="todo in allTodos" :key="todo._id">
+    <b-list-group-item v-for="todo in allTodos" :key="todo._id">
       <Todo
         :id="todo._id"
         :date="todo.date"
@@ -9,12 +9,12 @@
         :body="todo.body"
         :likes="todo.likes"
       />
-    </li>
+    </b-list-group-item>
   </template>
   <template v-else>
-    <li>Ваш список пуст</li>
+    <b-list-group-item>Ваш список пуст</b-list-group-item>
   </template>
-  </ul>
+  </b-list-group>
 </template>
 
 <script>
@@ -36,13 +36,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .todos {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 0;
-    justify-items: center;
-  }
-</style>

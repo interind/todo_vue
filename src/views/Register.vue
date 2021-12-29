@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="container">
     <h1>Register in</h1>
     <Form theme="register" :submit="register"/>
   </div>
@@ -33,6 +33,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-
-</style>

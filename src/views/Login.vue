@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="container">
     <h1>Login in</h1>
     <Form theme="login" :submit="login" />
   </div>
@@ -33,8 +33,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-  .login {
-    min-width: 600px;
-  }
-</style>

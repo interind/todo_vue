@@ -1,24 +1,27 @@
 <template>
-  <ul class="todo">
-    <li :class="currentClasses">
+  <b-list-group class="flex-row justify-content-between">
+    <b-list-group-item>
       <input
         type="checkbox"
         @change="checkedCompleted(id)"
         :checked="likes.length"
       >
       {{correctDate}}
-    </li>
-    <li :class="currentClasses">
+    </b-list-group-item>
+    <b-list-group-item class="title">
       <details>
-        <summary class="todo__title">
+        <summary>
           {{title}}
         </summary>
-        <p class="todo__description">{{body}}</p>
-      </details></li>
-    <li class="todo__item">
-      <button class="button-delete" @click="deleteCard(id)" type="button" />
-    </li>
-  </ul>
+        <p>{{body}}</p>
+      </details>
+    </b-list-group-item>
+    <b-list-group-item>
+      <b-button variant="light">
+        <b-icon @click="deleteCard(id)" icon="x-circle" scale="2" variant="danger"></b-icon>
+      </b-button>
+    </b-list-group-item>
+  </b-list-group>
 </template>
 
 <script>
@@ -28,7 +31,6 @@ export default {
   name: 'Todo',
   data: () => ({
     todo: [],
-    currentClasses: ['todo__item'],
   }),
   props: {
     title: String,
@@ -70,39 +72,8 @@ export default {
   },
 };
 </script>
-
 <style scoped>
-  .todo {
-    display: flex;
-    max-width: 1000px;
-    min-width: 600px;
-    list-style: none;
-    padding: 0;
-    border-bottom: 1px solid var(--color-grey);
-    position: relative;
-  }
-  .todo__description {
-    max-width: 400px;
-    word-wrap: break-word;
-  }
-  .todo__title {
-    cursor: pointer;
-  }
-  .todo__item {
-    text-decoration: none;
-    margin-right: 10px;
-  }
-  .todo__item:last-of-type {
-    margin-right: 0;
-  }
-  .button-delete {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    border: 0;
-    width: 20px;
-    height: 3px;
-    cursor: pointer;
-    background-color: var(--color-red);
+  .title {
+    width: 80%;
   }
 </style>

@@ -1,16 +1,26 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
+    <b-navbar class="links" type="dark" variant="dark">
     <template v-if="token">
-      <nav class="links">
-        <button class="button-close" @click="exit">Exit</button>
-      </nav>
+      <b-button variant="outline-info" class="m-2" @click="exit">
+        <b-icon icon="power" aria-hidden="true"></b-icon> Logout
+      </b-button>
     </template>
     <template v-else>
-      <nav class="links">
-        <router-link class="link" active-class="link_active" to="/login">Login</router-link> |
-        <router-link class="link" active-class="link_active" to="/register">Register</router-link>
-      </nav>
+      <router-link
+        class="link"
+        active-class="link link_active"
+        to="/login">
+          Login
+        </router-link> |
+      <router-link
+        class="link"
+        active-class="link link_active"
+        to="/register">
+          Register
+        </router-link>
     </template>
+    </b-navbar>
     <router-view />
   </div>
 </template>
@@ -35,27 +45,17 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: grid;
-  justify-content: center;
-  color: var(--color-black);
-  padding-top: 30px;
 }
 .links {
-  justify-self: end;
+  display: flex;
+  justify-content: flex-end;
 }
 .link {
   text-decoration: none;
-  color: var(--color-black);
+  color: #fff;
+  margin-right: 5px;
 }
-.button-close {
-    border: 0;
-    background-color: initial;
-    color: var(--color-red);
-    font-size: 20px;
-    width: 40px;
-    cursor: pointer;
-  }
 .link_active {
-  border-bottom: 1px solid var(--color-black);
+  color: #f0f;
 }
 </style>

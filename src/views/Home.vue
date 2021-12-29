@@ -61,8 +61,6 @@ export default {
   .info {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    justify-self: end;
     max-width: 50%;
   }
   .info__text {
